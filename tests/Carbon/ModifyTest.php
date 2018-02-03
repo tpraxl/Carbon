@@ -41,4 +41,15 @@ class ModifyTest extends AbstractTestCase
         // Then we expect it represent that time in the given timezone
         $this->assertEquals(new Carbon('2018-02-03 14:00:00', 'Europe/Berlin'), $b);
     }
+
+    public function testModifyWithTimeRespectsTimezoneWhenLocal()
+    {
+        // Default timezone has been set to America/Toronto in AbstractTestCase.php
+        // Given we have a Carbon Date in a certain timezone
+        $b = new Carbon('2018-02-03 00:00:00', 'America/Toronto');
+        // And we call modify with a time part
+        $b->modify('14:00');
+        // Then we expect it represent that time in the given timezone
+        $this->assertEquals(new Carbon('2018-02-03 14:00:00', 'America/Toronto'), $b);
+    }
 }
